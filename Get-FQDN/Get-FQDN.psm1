@@ -32,7 +32,7 @@ function Get-FQDN
                 Write-Debug "Error getting fqdn for $Computer ($($_.Exception.Message))"
                 $Result = if ($ShowHostnameWhenFqdnNotFound) {$Computer} Else {"Not Found"}
             }
-            Write-Host $Result
+            return $Result
         }
     }
 }
