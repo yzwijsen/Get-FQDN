@@ -30,14 +30,7 @@ function Get-FQDN
             Try { $Result = [System.Net.Dns]::GetHostEntry($Computer) | Select-Object -expandProperty HostName }
             Catch {
                 Write-Debug "Error getting fqdn for $Computer ($($_.Exception.Message))"
-                if ($ShowHostnameWhenFqdnNotFound)
-                {
-                    $Result = $Computer
-                }
-                else
-                {
-                    $Result = "Not Found"    
-                }
+                $Result = if ($ShowHostnameWhenFqdnNotFound) {$Computer} Else {"Not Found"}
             }
             Write-Host $Result
         }
