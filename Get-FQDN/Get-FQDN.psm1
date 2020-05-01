@@ -10,6 +10,7 @@ function Get-FQDN
     Hostname of computers to run against
     .EXAMPLE
     Get-FQDN -ComputerName host1, host2
+    .EXAMPLE
     Get-Content computers.txt | Get-FQDN
     #>
 
