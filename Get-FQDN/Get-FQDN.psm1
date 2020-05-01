@@ -38,7 +38,6 @@ function Get-FQDN
                 {
                     $Result = "Not Found"    
                 }
-                
             }
             Write-Host $Result
         }
