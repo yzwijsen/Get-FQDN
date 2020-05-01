@@ -17,19 +17,30 @@ function Get-FQDN
     [cmdletbinding()]
     Param (
         [parameter(ValueFromPipeline, Mandatory=$true)]
-        [string[]]$ComputerName
+        [string[]]$ComputerName,
+
+        [parameter()]
+        [switch]$ShowHostnameWhenFqdnNotFound
     )
 
     Process  
     {
         foreach ($Computer in $ComputerName)
         {
-            Try { $FQDN = [System.Net.Dns]::GetHostEntry($Computer) | Select-Object -expandProperty HostName }
+            Try { $Result = [System.Net.Dns]::GetHostEntry($Computer) | Select-Object -expandProperty HostName }
             Catch {
                 Write-Debug "Error getting fqdn for $Computer ($($_.Exception.Message))"
-                $FQDN = $Computer
+                if ($ShowHostnameWhenFqdnNotFound)
+                {
+                    $Result = $Computer
+                }
+                else
+                {
+                    $Result = "Not Found"    
+                }
+                
             }
-            Write-Host $FQDN
+            Write-Host $Result
         }
     }
 }
