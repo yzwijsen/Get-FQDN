@@ -6,7 +6,7 @@ function Get-FQDN
     .DESCRIPTION
     Gets the fully qualified domain name for a hostname using dns lookup.
     Accepts input from the pipeline
-    .PARAMETER Computers
+    .PARAMETER ComputerName
     Hostname of computers to run against
     .EXAMPLE
     Get-FQDN -ComputerName host1, host2
